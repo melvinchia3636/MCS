@@ -7,8 +7,27 @@ import Home from "./components/Home.jsx";
 import Navbar from "./components/Navbar.jsx"
 
 const Index = () => {
+  const [theme, setTheme] = React.useState(localStorage.theme);
+
+  React.useEffect(() => {
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setTheme("dark")
+    } else {
+      setTheme("light")
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    localStorage.theme = theme
+  }, [theme])
+
   return <>
-    <Navbar />
+    <Navbar setTheme={setTheme} theme={theme} />
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
