@@ -43,10 +43,10 @@ const Section = ({data, title, desc}) => {
 }
 
 const SmartSearchPromo = () => {
-    return <div className="w-full font-[QuickSand] text-slate-700 rounded-xl shadow-md flex-col p-12 my-12 bg-slate-100 flex justify-center items-center">
+    return <div className="w-full font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500 rounded-xl shadow-md flex-col p-12 my-12 bg-slate-100 dark:bg-zinc-600 flex justify-center items-center">
         <h2 className="text-4xl font-medium mb-2">Search for a Server</h2>
         <p className="text-lg">Try out our brand new <b>Smart Search</b> and find the Minecraft Servers of your dreams</p>
-        <button className="bg-amber-400 flex items-center gap-2 text-white font-medium text-xl py-4 px-6 shadow-md mt-6 rounded-md">
+        <button className="bg-amber-400 flex items-center gap-2 text-white font-medium text-xl py-4 pr-6 pl-5 shadow-md mt-6 rounded-md">
             <Icon icon="uil:search" className="w-6 h-6" />
             Smart Search
         </button>
@@ -55,8 +55,9 @@ const SmartSearchPromo = () => {
 
 const QandA = ({question, answer, showContent}) => {
     const [isContentShow, toggleContent] = React.useState(showContent || false)
-    return <div className="text-slate-700 font-[QuickSand] p-6 rounded-md shadow-md">
-        <div className={`w-full flex justify-between items-center cursor-pointer transition-all duration-500 ${isContentShow ? "mb-3 text-amber-500" : ""}`} onClick={() => toggleContent(!isContentShow)}>
+    return <div className="text-slate-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 font-[QuickSand] p-6 rounded-md shadow-md">
+        <div className={`w-full flex justify-between items-center cursor-pointer transition-all duration-500 ${isContentShow ? "mb-3 text-amber-500" : ""}`}
+        onClick={() => toggleContent(!isContentShow)}>
             <h3 className={`font-medium transition-all duration-500 text-${isContentShow ? "2" : ""}xl`}>{question}</h3>
             <Icon icon={"uil:"+(isContentShow ? "minus" : "angle-down")} className="w-6 h-6" />
         </div>
@@ -67,48 +68,61 @@ const QandA = ({question, answer, showContent}) => {
 }
 
 const FAQ = () => {
-    return <div className="text-slate-700 faq font-[QuickSand] my-12">
-        <h1 className="font-medium text-4xl mb-4">Frequently Asked Questions</h1>
-        <QandA showContent question="What are Minecraft Servers?" answer={<>
-            Minecraft servers are <b>multiplayer game server for Minecraft</b>. They are all owned and operated by people in the giant Minecraft community. They contain huge online worlds where thousands of Minecraft players can compete or collaborate with friends and frenemies in various games.
-            <br/>
-            <br/>
-            Source: <a>Wikipedia</a>, <a>Minecraft</a>
-        </>} />
-        <QandA question="What is a Minecraft Server List?" answer={<>
-            A Minecraft Server List can refer to one of two things; Either a <b>website</b> where players can find high quality servers for Minecraft, or the <b>multiplayer</b> menu inside the Minecraft game client, where a list of known servers is saved for later use. 
-            <br/>
-            <br/>
-            Source: <a>Fandom</a>
-        </>} />
-        <QandA question="Does Minecraft have an official multiplayer server?" answer={<>
-            No, there is no such thing as an official Minecraft server. That being said, <a>Mojang</a> (Minecraft's parent company) has officially partnered with a few servers like <a>Mineplex</a>. Additionally, there are servers hosted by Mojang, called Minecraft Realms. Those, however, are limited in gameplay features; therefore, we wouldn't recommend them. <a>Community-hosted</a> servers usually offer more options, better performance, and <a>cost less</a>. 
-            <br/>
-            <br/>
-            Source: <a>XBOX</a>, <a>Minecraft</a>
-        </>} />
-        <QandA question="How can I find a Minecraft Server IP?" answer={<>
-            Any gamer can can use our <a>Minecraft Server Search</a> feature to find a server IP for their specific device (whether that's a PC, a smartphone, or a console), or go through our server list.
-        </>} />
-        <QandA question="What should I know before joining a server?" answer={<>
-            Every server has different rules you need to learn and respect, and a staff team to ensure you stick to them.
-            <ol className="list-decimal pl-4 mt-4">
-                <li>Depending on the server, hacking is usually not allowed, nor is using a cracked client.</li>
-                <li>Keep swear words under control. Be kind and considerate of others and don't spam the in-game chat.</li>
-                <li>Respect the staff team and those offering their time to keep the server running smoothly.</li>
-                <li>Running a server costs money. If you like it, consider donating to support it.</li>
-            </ol>
-        </>} />
-        <QandA question="What games can I play on MC servers?" answer={<>
-            Pretty much anything your heart desires. There's hundreds of servers each suiting a different gameplay style, catering to all tastes. A Creative server will turn you into an artist, allowing you to craft huge constructions with ease, whereas a survival vanilla server will have you hunt and mine day and night in order to survive the zombies and skeletons!
-        </>} />
-        <QandA question="Where can I learn more about Minecraft?" answer={<>
-            You can visit the <a>official Minecraft website</a>, or read through the <a>Minecraft Wiki</a>. If you ever have any questions about Minecraft or Minecraft Servers, feel free to contact our support through the contact us button, or by joining our Discord server and creating a support ticket. 
-        </>} />
-        <QandA question="How can I play on a Minecraft server?" answer={<>
-            Find a server you like and copy it's IP address. Once you've copied the IP, start Minecraft, click "Multiplayer", then "Add Server". Then, paste the server's address in the IP Address field. Click "Done" to confirm, you will then be taken back to the servers list. You can now click "Join Server" to play on it. Here's a <a>complete video tutorial</a>. If you're facing any issues connecting, here are some <a>troubleshooting tips</a>.
-        </>} />
+    return <div className="text-slate-700 dark:text-white transition-all duration-500 faq font-[QuickSand] my-12">
+        <h1 className="font-medium text-4xl mb-6">Frequently Asked Questions</h1>
+        <div className="flex flex-col gap-3">
+            <QandA showContent question="What are Minecraft Servers?" answer={<>
+                Minecraft servers are <b>multiplayer game server for Minecraft</b>. They are all owned and operated by people in the giant Minecraft community. They contain huge online worlds where thousands of Minecraft players can compete or collaborate with friends and frenemies in various games.
+                <br/>
+                <br/>
+                Source: <a>Wikipedia</a>, <a>Minecraft</a>
+            </>} />
+            <QandA question="What is a Minecraft Server List?" answer={<>
+                A Minecraft Server List can refer to one of two things; Either a <b>website</b> where players can find high quality servers for Minecraft, or the <b>multiplayer</b> menu inside the Minecraft game client, where a list of known servers is saved for later use. 
+                <br/>
+                <br/>
+                Source: <a>Fandom</a>
+            </>} />
+            <QandA question="Does Minecraft have an official multiplayer server?" answer={<>
+                No, there is no such thing as an official Minecraft server. That being said, <a>Mojang</a> (Minecraft's parent company) has officially partnered with a few servers like <a>Mineplex</a>. Additionally, there are servers hosted by Mojang, called Minecraft Realms. Those, however, are limited in gameplay features; therefore, we wouldn't recommend them. <a>Community-hosted</a> servers usually offer more options, better performance, and <a>cost less</a>. 
+                <br/>
+                <br/>
+                Source: <a>XBOX</a>, <a>Minecraft</a>
+            </>} />
+            <QandA question="How can I find a Minecraft Server IP?" answer={<>
+                Any gamer can can use our <a>Minecraft Server Search</a> feature to find a server IP for their specific device (whether that's a PC, a smartphone, or a console), or go through our server list.
+            </>} />
+            <QandA question="What should I know before joining a server?" answer={<>
+                Every server has different rules you need to learn and respect, and a staff team to ensure you stick to them.
+                <ol className="list-decimal pl-4 mt-4">
+                    <li>Depending on the server, hacking is usually not allowed, nor is using a cracked client.</li>
+                    <li>Keep swear words under control. Be kind and considerate of others and don't spam the in-game chat.</li>
+                    <li>Respect the staff team and those offering their time to keep the server running smoothly.</li>
+                    <li>Running a server costs money. If you like it, consider donating to support it.</li>
+                </ol>
+            </>} />
+            <QandA question="What games can I play on MC servers?" answer={<>
+                Pretty much anything your heart desires. There's hundreds of servers each suiting a different gameplay style, catering to all tastes. A Creative server will turn you into an artist, allowing you to craft huge constructions with ease, whereas a survival vanilla server will have you hunt and mine day and night in order to survive the zombies and skeletons!
+            </>} />
+            <QandA question="Where can I learn more about Minecraft?" answer={<>
+                You can visit the <a>official Minecraft website</a>, or read through the <a>Minecraft Wiki</a>. If you ever have any questions about Minecraft or Minecraft Servers, feel free to contact our support through the contact us button, or by joining our Discord server and creating a support ticket. 
+            </>} />
+            <QandA question="How can I play on a Minecraft server?" answer={<>
+                Find a server you like and copy it's IP address. Once you've copied the IP, start Minecraft, click "Multiplayer", then "Add Server". Then, paste the server's address in the IP Address field. Click "Done" to confirm, you will then be taken back to the servers list. You can now click "Join Server" to play on it. Here's a <a>complete video tutorial</a>. If you're facing any issues connecting, here are some <a>troubleshooting tips</a>.
+            </>} />
+        </div>
     </div>
+}
+
+const JoinServerPromo = () => {
+    return <div className="w-full font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500 rounded-xl shadow-md flex-col p-12 my-12 bg-slate-100 dark:bg-zinc-600 flex justify-center items-center">
+        <h2 className="text-4xl font-medium mb-2">Complete MC server list</h2>
+        <p className="text-lg text-center"><b>Not quite what you're looking for?</b> No worries, there are plenty more servers to choose from!<br/><br/>There's a ton of MC servers listed on our site that you can join and play on. Game modes ranging from Survival, PvP, and Factions, to Creative, Skyblock, Pixelmon, and Minigames - We got it all! Just view the full list and use the filters at the top to select your preferred game mode and client version (1.8, 1.17, 1.18, or whichever you happen to use).</p>
+        <button className="bg-amber-400 flex items-center gap-2 text-white font-medium text-xl py-4 pl-6 pr-4 shadow-md mt-10 rounded-md">
+            All Java Servers
+            <Icon icon="uil:arrow-right" className="w-8 h-8" />
+        </button>
+    </div>;
 }
 
 const Home = () => {
@@ -140,10 +154,11 @@ const Home = () => {
         <Section data={data[1]} title={<><span className="text-amber-400">Most Popular</span> Minecraft Servers</>} desc={<>Play on the largest Minecraft communities along with tons of other competitors by joining any of the servers below! These have the <b>most server players online</b> right this moment, with content ranging from classic MMO RPG games to a parkour paradise. Enjoy the most massive worlds the best Minecraft multiplayer servers have to offer!</>} />
         <Section data={data[2]} title={<><span className="text-amber-400">New</span> Multiplayer Servers in 2021</>} desc={<>Looking for the newest Minecraft Servers to play on? Game on the freshest servers added to our Minecraft server list in December 2021! This server table updates every few seconds. You can rest assured you won't find MC servers any fresher than this elsewhere! Join any of the <b>{data.length} latest servers below</b>, or browse more servers you can play on here.</>} />
         <Section data={data[3]} title={<><span className="text-amber-400">1.18</span> Minecraft Servers</>} desc={<>So Microsoft and Mojang just released the latest Minecraft version...But your favorite Minecraft servers haven't quite caught up yet? You can still game with others - Experience the latest Minecraft updates online! Every game server below supports the <b>latest Minecraft 1.18</b>.</>} />
-        <Section data={data[4]} title={<><span className="text-amber-400">Survival</span> Servers on Minecraft</>} desc={<>Check out these excellent Minecraft Survival Servers, also known as <b>SMP Servers</b>! These Minecraft servers are what an MC player would be most familiar with. They tend to be quite close to the original game's survival mode. You know, searching for Minecraft diamonds, crafting "nether portals", avoiding Herobrine, that sort of stuff. Try this list if you're looking for a fun survival Minecraft server network! Also, don't forget to check out a cool variation of this game mode on (... but keep an eye out for mobs like Creepers and Griefers if you do, no Grief prevention plugins on those!)</>} />
         <SmartSearchPromo />
+        <Section data={data[4]} title={<><span className="text-amber-400">Survival</span> Servers on Minecraft</>} desc={<>Check out these excellent Minecraft Survival Servers, also known as <b>SMP Servers</b>! These Minecraft servers are what an MC player would be most familiar with. They tend to be quite close to the original game's survival mode. You know, searching for Minecraft diamonds, crafting "nether portals", avoiding Herobrine, that sort of stuff. Try this list if you're looking for a fun survival Minecraft server network! Also, don't forget to check out a cool variation of this game mode on (... but keep an eye out for mobs like Creepers and Griefers if you do, no Grief prevention plugins on those!)</>} />
         <Section data={data[5]} title={<>Best Minecraft <span className="text-amber-400">Skyblock</span> Servers</>} desc={<>No server list for Minecraft would be complete without the inclusion of these servers! Upon joining a Skyblock mode server, players get assigned tiny custom islands to play on and eventually expand. In many ways, those servers are similar to survival servers, but are, for the most part, <b>much more challenging</b>.</>} />
         <Section data={data[6]} title={<><span className="text-amber-400">Prison</span> Minecraft Servers</>} desc={<>hen playing on servers of this game mode, the objective is to <b>earn in-game money as a rookie and advance your player rank over time</b>. Eventually, you'll gain the right to "escape" and be a free player. If you're not into PvP (or fast-paced / high-action) games & you're looking to play on a server for a decent amount of time, a prison server can be a superb choice. To play on Minecraft with servers that include a Prison map just pick one from the list below!</>} />
+        <JoinServerPromo />
         <FAQ />
     </div> : "";
 }

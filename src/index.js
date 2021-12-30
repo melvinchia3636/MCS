@@ -5,6 +5,7 @@ import './style.css';
 
 import Home from "./components/Home.jsx";
 import Navbar from "./components/Navbar.jsx"
+import Footer from "./components/Footer.jsx";
 
 const Index = () => {
   const [theme, setTheme] = React.useState(localStorage.theme);
@@ -33,6 +34,7 @@ const Index = () => {
         <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
+    <Footer />
   </>;
 };
 
