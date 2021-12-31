@@ -112,7 +112,7 @@ function General({ category }) {
           <div className="flex w-full items-center justify-center gap-12 mt-12">
             <Link to={`?page=${currentPage - 1 >= 1 ? currentPage - 1 : 1}`} aria-label="hidden"><Icon icon="uil:angle-double-left" className="w-8 h-8 text-amber-400" /></Link>
             {title.pagination.slice(1, title.pagination.length - 1).map((e) => (
-              <Link to={`?page=${e}`} className={`${parseInt(e, 10) === currentPage ? 'bg-amber-400 text-white p-4 rounded-md shadow-md w-12 h-12 flex items-center justify-center' : 'text-slate-700'} font-medium text-xl`}>
+              <Link to={`?page=${e}`} className={`${parseInt(e, 10) === currentPage ? 'bg-amber-400 text-white p-4 rounded-md shadow-md w-12 h-12 flex items-center justify-center' : 'text-slate-700 dark:text-white'} font-medium text-xl`}>
                 {e}
               </Link>
             ))}
