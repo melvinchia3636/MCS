@@ -1,6 +1,10 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+
+import Loading from './Loading.jsx';
 
 function Section({ data, title, desc }) {
   return (
@@ -298,8 +302,10 @@ function JoinServerPromo() {
 
 function Home() {
   const [data, setData] = React.useState([]);
+  const location = useLocation();
 
   const fetchData = () => {
+    setData([]);
     fetch('https://cors-anywhere.thecodeblog.net/minecraft.buzz').then((res) => res.text()).then((raw) => {
       const HTMLParser = new DOMParser();
       const html = HTMLParser.parseFromString(raw, 'text/html');
@@ -309,7 +315,7 @@ function Home() {
         ip: e.querySelector('.ip-block').innerText,
         version: e.querySelector("span[title='Server Version']").innerText.trim(),
         gamemode: e.querySelector("span[title='Main Gamemode']").innerText.trim(),
-        playersOnline: e.querySelector("span[title='Players Online']")?.innerText?.trim(),
+        playersOnline: e.querySelector("span[title='Players Online']")?.innerText?.trim() || "Not Available",
         serverType: e.querySelector("span[title='Server Type']").innerText.trim(),
         rating: e.querySelectorAll('.fa-star').length,
         status: e.querySelector('.badge.fs-6')?.innerText?.trim(),
@@ -318,7 +324,7 @@ function Home() {
     });
   };
 
-  React.useEffect(fetchData, []);
+  React.useEffect(fetchData, [location]);
 
   return data.length ? (
     <div className="flex flex-col mx-16">
@@ -475,7 +481,7 @@ function Home() {
       <JoinServerPromo />
       <FAQ />
     </div>
-  ) : <div className="w-full min-h-[52vh]" />;
+  ) : <Loading />;
 }
 
 export default Home;

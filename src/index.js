@@ -34,9 +34,9 @@ function Index() {
   }, [theme]);
 
   return (
-    <>
-      <Navbar setTheme={setTheme} theme={theme} />
+    <main className="bg-white dark:bg-zinc-700 transition-all duration-500">
       <BrowserRouter>
+        <Navbar setTheme={setTheme} theme={theme} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:category" element={<Category />} />
@@ -46,9 +46,9 @@ function Index() {
           {['java', 'bedrock', 'new', 'popular', 'whitelist']
             .map((e) => <Route path={`/${e}/:page`} element={<General category={e} />} />)}
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
-    </>
+    </main>
   );
 }
 
