@@ -34,7 +34,7 @@ function Version() {
         ip: e.querySelector('.ip-block').innerText,
         version: e.querySelector("span[title='Server Version']").innerText.trim(),
         gamemode: e.querySelector("span[title='Main Gamemode']").innerText.trim(),
-        playersOnline: e.querySelector("span[title='Players Online']")?.innerText?.trim() || "Not Available",
+        playersOnline: e.querySelector("span[title='Players Online']")?.innerText?.trim() || 'Not Available',
         serverType: e.querySelector("span[title='Server Type']").innerText.trim(),
         rating: e.querySelectorAll('.fa-star').length,
         status: e.querySelector('.badge.fs-6')?.innerText?.trim(),
