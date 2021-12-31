@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function Section({ data, title, desc }) {
   return (
-    <div className="py-12 font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500 dark:bg-zinc-700">
+    <div className="py-12 font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500">
       <h1 className="font-medium text-4xl mb-3">{title}</h1>
       <p className="text-lg tracking-wide">{desc}</p>
       <div className="grid grid-cols-2 gap-6 mt-8">
@@ -330,7 +330,7 @@ function Home() {
             {' '}
             Minecraft Servers
           </>
-)}
+        )}
         desc={(
           <>
             Looking for the
@@ -339,7 +339,7 @@ function Home() {
             Whether you&apos;re looking for a survival server, a creative server, or even one with
             PvP - we&apos;ve got it covered.
           </>
-)}
+        )}
       />
       <Section
         data={data[1]}
@@ -349,7 +349,7 @@ function Home() {
             {' '}
             Minecraft Servers
           </>
-)}
+        )}
         desc={(
           <>
             Play on the largest Minecraft communities along with tons of other competitors by
@@ -360,7 +360,7 @@ function Home() {
             paradise. Enjoy the most massive worlds the best Minecraft multiplayer servers have to
             offer!
           </>
-)}
+        )}
       />
       <Section
         data={data[2]}
@@ -370,7 +370,7 @@ function Home() {
             {' '}
             Multiplayer Servers in 2021
           </>
-)}
+        )}
         desc={(
           <>
             Looking for the newest Minecraft Servers to play on? Game on the freshest servers
@@ -385,7 +385,7 @@ function Home() {
             </b>
             , or browse more servers you can play on here.
           </>
-)}
+        )}
       />
       <Section
         data={data[3]}
@@ -395,7 +395,7 @@ function Home() {
             {' '}
             Minecraft Servers
           </>
-)}
+        )}
         desc={(
           <>
             So Microsoft and Mojang just released the latest Minecraft version... But your favorite
@@ -404,7 +404,7 @@ function Home() {
             <b> latest Minecraft 1.18</b>
             .
           </>
-)}
+        )}
       />
       <SmartSearchPromo />
       <Section
@@ -415,7 +415,7 @@ function Home() {
             {' '}
             Servers on Minecraft
           </>
-)}
+        )}
         desc={(
           <>
             Check out these excellent Minecraft Survival Servers, also known as
@@ -428,7 +428,7 @@ function Home() {
             variation of this game mode on (... but keep an eye out for mobs like Creepers and
             Griefers if you do, no Grief prevention plugins on those!)
           </>
-)}
+        )}
       />
       <Section
         data={data[5]}
@@ -439,7 +439,7 @@ function Home() {
             {' '}
             Servers
           </>
-)}
+        )}
         desc={(
           <>
             No server list for Minecraft would be complete without the inclusion of these servers!
@@ -449,7 +449,7 @@ function Home() {
             <b> much more challenging</b>
             .
           </>
-)}
+        )}
       />
       <Section
         data={data[6]}
@@ -459,7 +459,7 @@ function Home() {
             {' '}
             Minecraft Servers
           </>
-)}
+        )}
         desc={(
           <>
             When playing on servers of this game mode, the objective is to
@@ -470,12 +470,12 @@ function Home() {
             be a superb choice.To play on Minecraft with servers that include a Prison map
             just pick one from the list below!
           </>
-)}
+        )}
       />
       <JoinServerPromo />
       <FAQ />
     </div>
-  ) : '';
+  ) : <div className="w-full min-h-[52vh]" />;
 }
 
 export default Home;

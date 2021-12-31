@@ -2,6 +2,11 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  devServer: {
+    historyApiFallback: {
+      disableDotRule: true,
+    },
+  },
   module: {
     rules: [
       {
@@ -31,4 +36,7 @@ module.exports = {
       favicon: './src/favicon.png',
     }),
   ],
+  output: {
+    publicPath: '/', // <- this is the important line along with historyApiFallback = true in the dev server config
+  },
 };

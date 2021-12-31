@@ -9,6 +9,10 @@ import Home from './components/Home.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 
+import Category from './components/Category.jsx';
+import Version from './components/Version.jsx';
+import General from './components/General.jsx';
+
 function Index() {
   const [theme, setTheme] = React.useState(localStorage.theme);
 
@@ -35,6 +39,12 @@ function Index() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/category/:category" element={<Category />} />
+          <Route path="/version/:version" element={<Version />} />
+          {['java', 'bedrock', 'new', 'popular', 'whitelist']
+            .map((e) => <Route path={`/${e}`} element={<General category={e} />} />)}
+          {['java', 'bedrock', 'new', 'popular', 'whitelist']
+            .map((e) => <Route path={`/${e}/:page`} element={<General category={e} />} />)}
         </Routes>
       </BrowserRouter>
       <Footer />
