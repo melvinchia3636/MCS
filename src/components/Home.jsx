@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
 
-import Loading from './Loading.jsx';
+import Loading from './utils/Loading.jsx';
 
 function Section({ data, title, desc }) {
   return (
@@ -17,7 +17,7 @@ function Section({ data, title, desc }) {
             <div className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <img alt={e.ip} src={e.thumbnail} className="w-12 h-12" />
+                  <img alt={e.ip} src={e.thumbnail} className="w-12 h-12 rounded-md" />
                   <div>
                     <p className="font-medium text-2xl">{e.ip}</p>
                     <div className="flex gap-1 mt-1">

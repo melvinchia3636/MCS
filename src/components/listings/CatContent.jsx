@@ -10,11 +10,11 @@ function CatContent({ title, data, currentPage }) {
       <p className="text-lg tracking-wide">{title.desc}</p>
       <div className="grid grid-cols-2 gap-6 mt-8">
         {data.length ? data.map((e) => (
-          <div className="w-full overflow-hidden rounded-xl shadow-[0_6px_12px_rgba(0,0,0,.15)] bg-white dark:bg-zinc-600 transition-all duration-500">
+          <Link to={`/server/${e.id}`} className="block w-full overflow-hidden rounded-xl shadow-[0_6px_12px_rgba(0,0,0,.15)] bg-white dark:bg-zinc-600 transition-all duration-500">
             <div className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <img alt={e.ip} src={e.thumbnail} className="w-12 h-12" />
+                  <img alt={e.ip} src={e.thumbnail} className="w-12 h-12 rounded-md" />
                   <div>
                     <p className="font-medium text-2xl">{e.ip}</p>
                     <div className="flex gap-1 mt-1">
@@ -51,7 +51,7 @@ function CatContent({ title, data, currentPage }) {
               </div>
             </div>
             <img alt={e.ip} src={e.banner} className="w-full object-fill" />
-          </div>
+          </Link>
         )) : ''}
       </div>
       {title.pagination.length ? (
