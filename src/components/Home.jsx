@@ -2,7 +2,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import Loading from './Loading.jsx';
 
@@ -292,10 +292,10 @@ function JoinServerPromo() {
         select your preferred game mode and client version (1.8, 1.17, 1.18, or whichever you
         happen to use).
       </p>
-      <button type="button" className="bg-amber-400 flex items-center gap-2 text-white font-medium text-xl py-4 pl-6 pr-4 shadow-md mt-10 rounded-md">
+      <Link to="/java" className="bg-amber-400 flex items-center gap-2 text-white font-medium text-xl py-4 pl-6 pr-4 shadow-md mt-10 rounded-md">
         All Java Servers
         <Icon icon="uil:arrow-right" className="w-8 h-8" />
-      </button>
+      </Link>
     </div>
   );
 }
