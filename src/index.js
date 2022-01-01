@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style.css';
 
 import Home from './components/Home.jsx';
-import Navbar from './components/Navbar.jsx';
-import Footer from './components/Footer.jsx';
 
-import Category from './components/Category.jsx';
-import Version from './components/Version.jsx';
-import General from './components/General.jsx';
+import Navbar from './components/utils/Navbar.jsx';
+import Footer from './components/utils/Footer.jsx';
+
+import Category from './components/listings/Category.jsx';
+import Version from './components/listings/Version.jsx';
+import General from './components/listings/General.jsx';
 
 function Index() {
   const [theme, setTheme] = React.useState(localStorage.theme);
