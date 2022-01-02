@@ -1,8 +1,8 @@
 const getData = async (url, currentPage) => {
-  const raw = await fetch(url).then((res) => res.text());
+  const raw = await fetch(url, { cache: 'no-store' }).then((res) => res.text());
   const HTMLParser = new DOMParser();
   const html = HTMLParser.parseFromString(raw, 'text/html');
-  const d = Array.from(html.querySelectorAll('.server-row')).map((e) => ({
+  const d = Array.from(html.querySelectorAll('.server-row')).filter((e) => !e.querySelector('i[title="Sponsored Server"]')).map((e) => ({
     id: e.querySelector('a').href.split('/').pop(),
     thumbnail: e.querySelector('img[src*=favicon]').src,
     banner: e.querySelector('img[src*=banner]').src,
@@ -19,7 +19,8 @@ const getData = async (url, currentPage) => {
     desc: currentPage === 1 ? html.querySelector('h1').nextElementSibling.innerText.trim() : '',
     pagination: Array.from(html.querySelectorAll('.pagination .page-link')).map((e) => e.innerText.trim()),
   };
-  return [d, t];
+  const c = Array.from(html.querySelectorAll('.dropdown-menu a')).filter((e) => e.href.split('=').pop().match(/[A-Z]{2}/)).map(((e) => [e.innerText.trim(), e.href.split('=').pop()])).sort();
+  return [d, t, c];
 };
 
 export default getData;

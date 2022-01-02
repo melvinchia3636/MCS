@@ -306,7 +306,7 @@ function Home() {
 
   const fetchData = () => {
     setData([]);
-    fetch('https://cors-anywhere.thecodeblog.net/minecraft.buzz').then((res) => res.text()).then((raw) => {
+    fetch('https://cors-anywhere.thecodeblog.net/minecraft.buzz', { cache: 'no-store' }).then((res) => res.text()).then((raw) => {
       const HTMLParser = new DOMParser();
       const html = HTMLParser.parseFromString(raw, 'text/html');
       const d = Array.from(html.querySelectorAll('.row > section[itemtype*=Table]')).map((f) => Array.from(f.querySelectorAll('.server-row')).map((e) => ({

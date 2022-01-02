@@ -9,6 +9,7 @@ import Home from './components/Home.jsx';
 
 import Navbar from './components/utils/Navbar.jsx';
 import Footer from './components/utils/Footer.jsx';
+import NotFound from './components/utils/404.jsx';
 
 import Category from './components/listings/Category.jsx';
 import Version from './components/listings/Version.jsx';
@@ -41,6 +42,7 @@ function Index() {
       <BrowserRouter>
         <Navbar setTheme={setTheme} theme={theme} />
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
 
           <Route path="/category/:category" element={<Category />} />

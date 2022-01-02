@@ -18,6 +18,7 @@ function General({ category }) {
     desc: '',
     pagination: [],
   });
+  const [countries, setCountries] = React.useState([]);
 
   const categoryMap = {
     java: 'servers',
@@ -31,18 +32,27 @@ function General({ category }) {
 
   const fetchData = async () => {
     setData([]);
+    const country = new URL(window.location.href).searchParams.get('country') || '';
     currentPage = parseInt(searchParams[0].get('page'), 10) || 1;
     window.scrollTo({ top: 0 });
 
-    const [d, t] = await getData(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/${categoryMap[category]}/${currentPage}`, currentPage);
+    const [d, t, c] = await getData(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/${categoryMap[category]}/${currentPage}&filter_country=${country}`, currentPage);
     setData(d);
     setTitle(t);
+    setCountries(c);
   };
 
   React.useEffect(fetchData, [location]);
 
   return (
-    data.length ? <CatContent data={data} title={title} currentPage={currentPage} /> : <Loading />
+    data.length ? (
+      <CatContent
+        data={data}
+        title={title}
+        currentPage={currentPage}
+        countries={countries}
+      />
+    ) : <Loading />
   );
 }
 

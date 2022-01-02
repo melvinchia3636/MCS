@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import 'flagpack/src/flagpack.scss';
 
@@ -30,13 +30,13 @@ const getData = async (id) => {
     return Object.fromEntries(d);
   };
 
-  const raw = await fetch(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/server/${id}`).then((res) => res.text());
+  const raw = await fetch(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/server/${id}`, { cache: 'no-store' }).then((res) => res.text());
   const HTMLParser = new DOMParser();
   const html = HTMLParser.parseFromString(raw, 'text/html');
   const data = {
     thumbnail: html.querySelector('section header img').src,
     name: html.querySelector('section header h1').innerText.trim(),
-    .../^(?<status>Online|Offline)\s+-\s+(?<votes>\d+)\s+Vote\(s\),\s+(?<reviewCount>\d+)\s+Review\(s\),\s+Rated:\s+(?<rate>\d)\/5.$/.exec(html.querySelector('section header #vote-line').innerText.trim()).groups,
+    .../^(?<status>Online|Offline)\s+(-|\|)\s+(?<votes>\d+)\s+Vote\(s\),\s+(?<reviewCount>(?:\d+|No))\s+Review(?:s|\(s\))(?:,\s+Rated:\s+(?<rate>\d)\/5)?./.exec(html.querySelector('section header #vote-line').innerText.trim()).groups,
     website: Array.from(html.querySelectorAll('a.btn.btn-light.p-2.p-sm-3.py-3')).filter((e) => e.innerText.trim() === 'Website').shift()?.href || null,
     discord: Array.from(html.querySelectorAll('a.btn.btn-light.p-2.p-sm-3.py-3')).filter((e) => e.innerText.trim() === 'Discord').shift()?.href || null,
     ...cleanupData(html.querySelectorAll('#datadiv > div')),
@@ -49,44 +49,57 @@ function Details() {
   const location = useLocation();
 
   const [data, setData] = React.useState({});
+  const [seePing, setSeePing] = React.useState(false);
 
   React.useEffect(() => getData(parseInt(params.id, 10)).then((d) => setData(d)), [location]);
 
   return (
     JSON.stringify(data) !== '{}' ? (
-      <div className="py-12 min-h-[52vh] px-16 font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500 dark:text-white transition-all duration-500">
+      <div className="py-12 min-h-[52vh] px-16 font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500">
         <div className="flex items-center gap-4">
           <img src={data.thumbnail} alt="thumbnail" className="rounded-md w-20 h-20" />
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-6">
               <h1 className="font-medium text-3xl tracking-wide text-slate-700 dark:text-white transition-all duration-500">{data.name}</h1>
-              <div className={`flex mt-1 items-center gap-1 rounded-full ${data.status === 'Online' ? 'bg-amber-400' : 'bg-rose-500'} pr-4 pl-3 font-medium py-1 shadow-sm text-white`}>
+              <div className={`flex mt-1 items-center gap-1 rounded-full ${data.status === 'Online' ? 'bg-amber-400' : 'bg-rose-500'} pr-4 pl-3 font-medium py-1 shadow-md text-white`}>
                 <Icon icon={`uil:${data.status === 'Online' ? 'check' : 'times'}`} className="mt-0.5 w-5 h-5" />
                 {data.status}
               </div>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex gap-1">
-                {Array(parseInt(data.rate, 10)).fill(0).map(() => <div className="w-2.5 h-2.5 bg-amber-400 rounded-full" />)}
-                {Array(5 - parseInt(data.rate, 10)).fill(0).map(() => <div className="w-2.5 h-2.5 border-2 border-amber-400 rounded-full" />)}
+                {Array(parseInt(data.rate, 10) || 0).fill(0).map(() => <div className="w-2.5 h-2.5 bg-amber-400 rounded-full" />)}
+                {Array(5 - (parseInt(data.rate, 10) || 0)).fill(0).map(() => <div className="w-2.5 h-2.5 border-2 border-amber-400 rounded-full" />)}
               </div>
-              <p className="font-medium text-slate-700 dark:text-white transition-all duration-500">5 Vote(s), 21 Review(s)</p>
+              <p className="font-medium text-slate-700 dark:text-white transition-all duration-500">
+                {data.votes}
+                {' '}
+                Vote(s),
+                {' '}
+                {data.reviewCount}
+                {' '}
+                Review(s)
+              </p>
             </div>
           </div>
         </div>
         <div className="flex gap-2 my-12 text-slate-700 dark:text-white transition-all duration-500">
-          <a href="/" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-amber-400 text-white">
+          <a href="/" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-amber-400 hover:bg-amber-500 transition-all duration-200 text-white">
             <Icon icon="uil:thumbs-up" className="w-6 h-6" />
             Votes
           </a>
-          <a href="/" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 dark:bg-zinc-600 dark:bg-zinc-600 transition-all duration-500">
-            <Icon icon="uil:link" className="w-6 h-6" />
-            Website
-          </a>
-          <a href="/" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 dark:bg-zinc-600 dark:bg-zinc-600 transition-all duration-500">
-            <Icon icon="mdi:discord" className="w-6 h-6" />
-            Discord
-          </a>
+          {data.website ? (
+            <a href={data.website} target="_blank" rel="noreferrer" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
+              <Icon icon="uil:link" className="w-6 h-6" />
+              Website
+            </a>
+          ) : ''}
+          {data.discord ? (
+            <a href={data.discord} target="_blank" rel="noreferrer" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
+              <Icon icon="mdi:discord" className="w-6 h-6" />
+              Discord
+            </a>
+          ) : ''}
         </div>
         <h2 className="text-slate-400 text-2xl font-medium">Server Information</h2>
         <div className="mt-2 flex items-center border-b border-slate-200 dark:border-zinc-500 transition-all duration-500 py-4">
@@ -114,9 +127,9 @@ function Details() {
           </div>
           <div className="text-slate-700 dark:text-white transition-all duration-500 font-medium flex flex-wrap gap-2">
             {data.serverType.map((e) => (
-              <div className="flex items-center gap-1 rounded-full bg-slate-100 dark:bg-zinc-600 px-4 font-medium py-1 shadow-md text-slate-700 dark:text-white transition-all duration-500">
+              <Link to={`/${e.split(' ')[0].toLowerCase()}`} className="flex items-center gap-1 rounded-full bg-slate-100 dark:bg-zinc-600 hover:bg-slate-200 hover:duration-100 dark:hover:bg-zinc-500 px-4 font-medium py-1 shadow-md text-slate-700 dark:text-white transition-all duration-500">
                 {e}
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -127,9 +140,9 @@ function Details() {
           </div>
           <div className="text-slate-700 dark:text-white transition-all duration-500 font-medium flex flex-wrap gap-x-2 gap-y-2.5">
             {data.gamemodes.map((e) => (
-              <div className="flex whitespace-nowrap items-center gap-1 rounded-full bg-slate-100 dark:bg-zinc-600 px-4 font-medium py-1 shadow-md text-slate-700 dark:text-white transition-all duration-500">
+              <Link to={`/category/${e.toLowerCase().replace(/\s/g, '-')}`} className="flex whitespace-nowrap items-center gap-1 rounded-full bg-slate-100 dark:bg-zinc-600 hover:bg-slate-200 hover:duration-100 dark:hover:bg-zinc-500 px-4 font-medium py-1 shadow-md text-slate-700 dark:text-white transition-all duration-500">
                 {e}
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -140,9 +153,9 @@ function Details() {
           </div>
           <div className="text-slate-700 dark:text-white transition-all duration-500 font-medium flex flex-wrap gap-x-2 gap-y-2.5">
             {data.versions.map((e) => (
-              <div className="flex whitespace-nowrap items-center gap-1 rounded-full bg-slate-100 dark:bg-zinc-600 px-4 font-medium py-1 shadow-md text-slate-700 dark:text-white transition-all duration-500">
+              <Link to={`/version/${e}`} className="flex whitespace-nowrap items-center gap-1 rounded-full bg-slate-100 dark:bg-zinc-600 hover:bg-slate-200 hover:duration-100 dark:hover:bg-zinc-500 px-4 font-medium py-1 shadow-md text-slate-700 dark:text-white transition-all duration-500">
                 {e}
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -159,8 +172,8 @@ function Details() {
             Connection
           </div>
           <div className="text-white font-medium">
-            <div className="flex whitespace-nowrap items-center gap-1 rounded-full bg-emerald-400 px-4 font-medium py-1 shadow-md text-white">
-              {data.connection[0]}
+            <div className={`flex whitespace-nowrap items-center gap-1 rounded-full transition-all duration-500 cursor-help ${data.connection ? 'bg-emerald-400' : 'bg-rose-500'} px-4 font-medium py-1 shadow-md text-white`} onMouseEnter={() => setSeePing(true)} onMouseLeave={() => setSeePing(false)}>
+              {data.connection ? data.connection[seePing ? 1 : 0] : 'Not available'}
             </div>
           </div>
         </div>
@@ -170,7 +183,7 @@ function Details() {
             Country
           </div>
           <div className="text-slate-700 dark:text-white transition-all duration-500 text-lg font-medium flex items-center gap-2">
-            <span className={`fp fp-square fp-rounded fp-md ${data.country[1].toLowerCase()}`} />
+            <span className={`fp fp-square !w-8 !h-8 rounded-full ${data.country[1].toLowerCase()}`} />
             {data.country[0]}
           </div>
         </div>
