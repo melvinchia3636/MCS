@@ -8,10 +8,11 @@ import 'flagpack/src/flagpack.scss';
 import CountryChooser from './CountryChooser.jsx';
 
 function CatContent({
-  title, data, currentPage, countries,
+  title, data, currentPage, countries, hasSorting,
 }) {
   const [isCountryChooserOpen, toggleCountryChooser] = React.useState(false);
   const [isServerTypeChooserOpen, toggleServerTypeChooser] = React.useState(false);
+  const [isSortingChooserOpen, toggleSortingChooser] = React.useState(false);
   const [countryFilter, setCountryFilter] = React.useState('');
 
   const currentCountry = new URL(window.location.toString()).searchParams.get('country');
@@ -22,10 +23,53 @@ function CatContent({
         <h1 className="font-medium text-4xl mb-3 text-amber-400">{title.title}</h1>
         <p className="text-lg tracking-wide">{title.desc}</p>
         <div className="mt-4 flex gap-3">
-          <a href={data.website} target="_blank" rel="noreferrer" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
-            <Icon icon="uil:sort" className="w-6 h-6" />
-            Sort by: None
-          </a>
+          {hasSorting ? (
+            <button type="button" className="flex-grow relative font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleSortingChooser(!isSortingChooserOpen)}>
+              <Icon icon="uil:sort" className="w-6 h-6" />
+              Sort by: None
+              <div className={`w-full overflow-hidden bg-white text-slate-700 absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isSortingChooserOpen ? 'max-h-56 py-5' : 'max-h-0'}`}>
+                <Link
+                  to={(() => {
+                    const url = new URL(window.location.toString());
+                    url.searchParams.set('sort', 0);
+                    url.searchParams.delete('page');
+                    return url.pathname + url.search;
+                  })()}
+                  className="border-b border-slate-100 pb-4 mb-4 flex items-center gap-2"
+                >
+                  <Icon
+                    icon="uil:users-alt"
+                    className="w-6 h-6"
+                  />
+                  Players
+                </Link>
+                <Link
+                  to={(() => {
+                    const url = new URL(window.location.toString());
+                    url.searchParams.set('sort', 1);
+                    url.searchParams.delete('page');
+                    return url.pathname + url.search;
+                  })()}
+                  className="border-b border-slate-100 pb-4 mb-4 flex items-center gap-2"
+                >
+                  <Icon icon="uil:thumbs-up" className="w-6 h-6" />
+                  Votes
+                </Link>
+                <Link
+                  to={(() => {
+                    const url = new URL(window.location.toString());
+                    url.searchParams.set('sort', 2);
+                    url.searchParams.delete('page');
+                    return url.pathname + url.search;
+                  })()}
+                  className="flex items-center gap-2"
+                >
+                  <Icon icon="uil:clock" className="w-6 h-6" />
+                  Latest
+                </Link>
+              </div>
+            </button>
+          ) : ''}
           <button onClick={() => toggleCountryChooser(true)} type="button" href={data.website} target="_blank" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
             <Icon icon="uil:globe" className="w-6 h-6" />
             Country:
@@ -35,8 +79,10 @@ function CatContent({
           </button>
           <button type="button" className="flex-grow font-medium py-4 text-lg flex relative justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleServerTypeChooser(!isServerTypeChooserOpen)}>
             <Icon icon="uil:server" className="w-6 h-6" />
-            Server Type: All
-            <div className={`w-full overflow-hidden bg-white text-slate-700 absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isServerTypeChooserOpen ? 'max-h-32 pt-5 pb-6' : 'max-h-0'}`}>
+            Server Type:
+            {' '}
+            {['Java', 'Bedrock / PE'][parseInt(new URL(window.location.toString()).searchParams.get('type'), 10)] || 'All'}
+            <div className={`w-full overflow-hidden bg-white text-slate-700 absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isServerTypeChooserOpen ? 'max-h-32 py-5' : 'max-h-0'}`}>
               <Link
                 to={(() => {
                   const url = new URL(window.location.toString());
@@ -169,6 +215,7 @@ function CatContent({
 CatContent.propTypes = {
   data: PropTypes.objectOf.isRequired,
   title: PropTypes.objectOf.isRequired,
+  hasSorting: PropTypes.bool.isRequired,
   currentPage: PropTypes.arrayOf(PropTypes.number).isRequired,
   countries: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
 };

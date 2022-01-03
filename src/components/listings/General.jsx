@@ -36,7 +36,7 @@ function General({ category }) {
     currentPage = parseInt(searchParams[0].get('page'), 10) || 1;
     window.scrollTo({ top: 0 });
 
-    const [d, t, c] = await getData(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/${categoryMap[category]}/${currentPage}&filter_country=${country}`, currentPage);
+    const [d, t, c] = await getData(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/${categoryMap[category]}/${currentPage}&type=${new URL(window.location.href).searchParams.get('type')}&order_by=${['online_players', 'votes', 'server_id'][parseInt(new URL(window.location.href).searchParams.get('sort'), 10)]}&filter_country=${country}`, currentPage);
     setData(d);
     setTitle(t);
     setCountries(c);
@@ -51,6 +51,7 @@ function General({ category }) {
         title={title}
         currentPage={currentPage}
         countries={countries}
+        hasSorting={category === 'java'}
       />
     ) : <Loading />
   );
