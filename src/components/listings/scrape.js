@@ -19,7 +19,8 @@ const getData = async (url, currentPage) => {
     desc: currentPage === 1 ? html.querySelector('h1').nextElementSibling.innerText.trim() : '',
     pagination: Array.from(html.querySelectorAll('.pagination .page-link')).map((e) => e.innerText.trim()),
   };
-  const c = Array.from(html.querySelectorAll('.dropdown-menu a')).filter((e) => e.href.split('=').pop().match(/[A-Z]{2}/)).map(((e) => [e.innerText.trim(), e.href.split('=').pop()])).sort();
+  const c = Array.from(html.querySelectorAll('.dropdown-menu a')).filter((e) => e.href.match(new RegExp(`${window.location.pathname.split('/').pop()}/${currentPage.toString()}&filter_country=[A-Z]{2}$`))).map(((e) => [e.innerText.trim(), e.href.split('=').pop()])).sort();
+  console.log(c);
   return [d, t, c];
 };
 

@@ -11,6 +11,7 @@ function CatContent({
   title, data, currentPage, countries,
 }) {
   const [isCountryChooserOpen, toggleCountryChooser] = React.useState(false);
+  const [isServerTypeChooserOpen, toggleServerTypeChooser] = React.useState(false);
   const [countryFilter, setCountryFilter] = React.useState('');
 
   const currentCountry = new URL(window.location.toString()).searchParams.get('country');
@@ -32,10 +33,39 @@ function CatContent({
             {currentCountry ? <span className={`fp fp-square fp-large !w-6 !h-6 rounded-full ${currentCountry.toLowerCase()}`} /> : ''}
             {(countries.filter((e) => e[1] === currentCountry)[0] || [])[0] || 'All'}
           </button>
-          <a href={data.website} target="_blank" rel="noreferrer" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
+          <button type="button" className="flex-grow font-medium py-4 text-lg flex relative justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleServerTypeChooser(!isServerTypeChooserOpen)}>
             <Icon icon="uil:server" className="w-6 h-6" />
             Server Type: All
-          </a>
+            <div className={`w-full overflow-hidden bg-white text-slate-700 absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isServerTypeChooserOpen ? 'max-h-32 pt-5 pb-6' : 'max-h-0'}`}>
+              <Link
+                to={(() => {
+                  const url = new URL(window.location.toString());
+                  url.searchParams.set('type', 0);
+                  url.searchParams.delete('page');
+                  return url.pathname + url.search;
+                })()}
+                className="border-b border-slate-100 pb-4 mb-4 flex items-center gap-2"
+              >
+                <Icon
+                  icon="grommet-icons:java"
+                  className="w-6 h-6"
+                />
+                Minecraft Java Edition
+              </Link>
+              <Link
+                to={(() => {
+                  const url = new URL(window.location.toString());
+                  url.searchParams.set('type', 1);
+                  url.searchParams.delete('page');
+                  return url.pathname + url.search;
+                })()}
+                className="flex items-center gap-2"
+              >
+                <Icon icon="uil:desktop" className="w-6 h-6" />
+                Minecraft Bedrock/PE Edition
+              </Link>
+            </div>
+          </button>
         </div>
         <div className="grid grid-cols-2 gap-6 mt-8">
           {data.length ? data.map((e) => (
