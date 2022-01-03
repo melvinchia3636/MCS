@@ -27,7 +27,7 @@ function CatContent({
             <button type="button" className="flex-grow relative font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleSortingChooser(!isSortingChooserOpen)}>
               <Icon icon="uil:sort" className="w-6 h-6" />
               Sort by: None
-              <div className={`w-full overflow-hidden bg-white text-slate-700 absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isSortingChooserOpen ? 'max-h-56 py-5' : 'max-h-0'}`}>
+              <div className={`w-full overflow-hidden bg-white text-slate-700 dark:bg-zinc-600 dark:text-white absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isSortingChooserOpen ? 'max-h-56 py-5' : 'max-h-0'}`}>
                 <Link
                   to={(() => {
                     const url = new URL(window.location.toString());
@@ -82,7 +82,7 @@ function CatContent({
             Server Type:
             {' '}
             {['Java', 'Bedrock / PE'][parseInt(new URL(window.location.toString()).searchParams.get('type'), 10)] || 'All'}
-            <div className={`w-full overflow-hidden bg-white text-slate-700 absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isServerTypeChooserOpen ? 'max-h-32 py-5' : 'max-h-0'}`}>
+            <div className={`w-full overflow-hidden bg-white text-slate-700 dark:bg-zinc-600 dark:text-white absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isServerTypeChooserOpen ? 'max-h-32 py-5' : 'max-h-0'}`}>
               <Link
                 to={(() => {
                   const url = new URL(window.location.toString());
@@ -115,7 +115,8 @@ function CatContent({
         </div>
         <div className="grid grid-cols-2 gap-6 mt-8">
           {data.length ? data.map((e) => (
-            <Link to={`/server/${e.id}`} className="block w-full overflow-hidden rounded-xl shadow-[0_6px_12px_rgba(0,0,0,.15)] bg-white hover:duration-100 hover:bg-slate-50 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
+            <Link to={`/server/${e.id}`} className="block w-full overflow-hidden rounded-xl 
+             bg-white hover:duration-100 hover:bg-slate-50 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
               <div className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4 w-full">

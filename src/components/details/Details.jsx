@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
@@ -5,6 +6,7 @@ import { Icon } from '@iconify/react';
 import 'flagpack/src/flagpack.scss';
 
 import Loading from '../utils/Loading.jsx';
+import { QandA } from '../Home.jsx';
 
 const getData = async (id) => {
   const cleanupData = (data) => {
@@ -40,6 +42,16 @@ const getData = async (id) => {
     website: Array.from(html.querySelectorAll('a.btn.btn-light.p-2.p-sm-3.py-3')).filter((e) => e.innerText.trim() === 'Website').shift()?.href || null,
     discord: Array.from(html.querySelectorAll('a.btn.btn-light.p-2.p-sm-3.py-3')).filter((e) => e.innerText.trim() === 'Discord').shift()?.href || null,
     ...cleanupData(html.querySelectorAll('#datadiv > div')),
+    desc: html.querySelectorAll('section')[1].querySelector('p').innerHTML.trim(),
+    similar: Array.from(html.querySelectorAll('.server-listing')).map((e) => ({
+      name: e.querySelector('h3').innerText.trim(),
+      thumbnail: e.querySelector('img').src,
+      info: e.querySelector('.flex-grow-1.ms-3 > i').innerText.trim().replace(',', ''),
+      rates: e.querySelector('strong').innerText.trim().split(' ').pop().split('/')
+        .shift(),
+      onlinePlayers: e.querySelector('.flex-grow-1.ms-3').innerHTML.split('<br>')[1].replace(',', ''),
+      link: `/server/${e.querySelector('a').href.split('/').pop()}`,
+    })),
   };
   return data;
 };
@@ -51,7 +63,10 @@ function Details() {
   const [data, setData] = React.useState({});
   const [seePing, setSeePing] = React.useState(false);
 
-  React.useEffect(() => getData(parseInt(params.id, 10)).then((d) => setData(d)), [location]);
+  React.useEffect(() => {
+    setData({});
+    getData(parseInt(params.id, 10)).then((d) => setData(d));
+  }, [location]);
 
   return (
     JSON.stringify(data) !== '{}' ? (
@@ -112,13 +127,22 @@ function Details() {
           <div className="text-slate-700 dark:text-white transition-all duration-500 text-lg font-medium">{data.serverIP || data.javaIP}</div>
         </div>
         {data.bedrockIP ? (
-          <div className="flex items-center border-b border-slate-200 dark:border-zinc-500 transition-all duration-500 py-4">
-            <div className="flex items-center gap-2 text-lg w-72 font-medium text-slate-500 dark:text-white transition-all duration-500 flex-shrink-0">
-              <Icon icon="uil:location-point" className="w-6 h-6" />
-              Bedrock IP
+          <>
+            <div className="flex items-center border-b border-slate-200 dark:border-zinc-500 transition-all duration-500 py-4">
+              <div className="flex items-center gap-2 text-lg w-72 font-medium text-slate-500 dark:text-white transition-all duration-500 flex-shrink-0">
+                <Icon icon="uil:location-point" className="w-6 h-6" />
+                Bedrock IP
+              </div>
+              <div className="text-slate-700 dark:text-white transition-all duration-500 text-lg font-medium">{data.bedrockIP}</div>
             </div>
-            <div className="text-slate-700 dark:text-white transition-all duration-500 text-lg font-medium">{data.bedrockIP}</div>
-          </div>
+            <div className="flex items-center border-b border-slate-200 dark:border-zinc-500 transition-all duration-500 py-4">
+              <div className="flex items-center gap-2 text-lg w-72 font-medium text-slate-500 dark:text-white transition-all duration-500 flex-shrink-0">
+                <Icon icon="majesticons:hashtag-line" className="w-6 h-6" />
+                Bedrock Port
+              </div>
+              <div className="text-slate-700 dark:text-white transition-all duration-500 text-lg font-medium">{data.bedrockPort}</div>
+            </div>
+          </>
         ) : ''}
         <div className="flex items-center border-b border-slate-200 dark:border-zinc-500 transition-all duration-500 py-4">
           <div className="flex items-center gap-2 text-lg w-72 font-medium text-slate-500 dark:text-white transition-all duration-500 flex-shrink-0">
@@ -193,6 +217,156 @@ function Details() {
             Uptime
           </div>
           <div className="text-slate-700 dark:text-white transition-all duration-500 text-lg font-medium">{data.uptime}</div>
+        </div>
+        <div className="flex justify-between mt-12 gap-12">
+          <div>
+            <h2 className="text-slate-400 text-2xl font-medium mb-4">Server Description</h2>
+            <p dangerouslySetInnerHTML={{ __html: data.desc }} className="text-lg text-slate-700 dark:text-white transition-all duration-500" />
+          </div>
+          <div className="flex-shrink-0">
+            <h2 className="text-slate-400 text-2xl font-medium mb-4">Similar Servers</h2>
+            <div className="flex flex-col gap-4">
+              {data.similar.map((e) => (
+                <Link to={e.link} className="flex items-center gap-4 shadow-[0_4px_6px_rgba(0,0,0,.10)] rounded-xl p-6 bg-white dark:bg-zinc-600 hover:bg-slate-50 dark:hover:bg-zinc-500 transition-all duration-200">
+                  <img src={e.thumbnail} alt={e.thumbnail} />
+                  <div className="text-slate-700 dark:text-white transition-all duration-500">
+                    <h3 className="text-2xl font-medium">{e.name}</h3>
+                    <p className="text-lg whitespace-nowrap">
+                      {e.info}
+                      ,
+                      {' '}
+                      {e.onlinePlayers}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+        <h2 className="text-slate-400 text-2xl font-medium mb-4 mt-12">Frequently Asked Questions</h2>
+        <div className="flex flex-col gap-4">
+          <QandA
+            question={`How do I join ${data.name.substr(0, data.name.lastIndexOf('Minecraft Server'))}?`}
+            answer={(
+              <>
+                {data.javaIP || data.serverIP ? (
+                  <>
+                    Play McYAY with Minecraft Java:
+                    <ul className="list-disc pl-8">
+                      <li>
+                        <span className="underline text-amber-400">Copy the Java server IP</span>
+                        {' '}
+                        from this page.
+                      </li>
+                      <li>Open up Minecraft and wait for it to fully load.</li>
+                      <li>Click on &quot;Multiplayer&quot;, then &quot;Add Server&quot;.</li>
+                      <li>Paste the Server&apos;s IP in the &quot;IP Address&quot; field.</li>
+                      <li>Click &quot;Done&quot;.</li>
+                      <li>
+                        Select
+                        {' '}
+                        <b>{data.name.substr(0, data.name.lastIndexOf('Minecraft Server'))}</b>
+                        {' '}
+                        from the list and click on &quot;Join Server&quot;.
+                      </li>
+                    </ul>
+                  </>
+                ) : ''}
+                {data.bedrockIP ? (
+                  <>
+                    <br />
+                    Play McYAY with Minecraft Bedrock/PE:
+                    <ul className="list-disc pl-8">
+                      <li>Play BumbleCraft with Minecraft Bedrock / PE:</li>
+                      <li>
+                        <span className="underline text-amber-400">Copy the Bedrock server IP</span>
+                        {' '}
+                        from this page.
+                      </li>
+                      <li>
+                        Open up Minecraft Pocket Edition and press
+                        the &quot;Play&quot; button.
+                      </li>
+                      <li>
+                        Go to the &quot;Servers&quot; tab and
+                        press the &quot;Add Server&quot; button.
+                      </li>
+                      <li>
+                        Paste the Server&apos;s IP in the &quot;Server
+                        Address&quot; field,&nbsp;
+                      </li>
+                      <li>
+                        and
+                        {' '}
+                        <b>{data.bedrockPort}</b>
+                        {' '}
+                        in the &quot;Port&quot; field.
+                      </li>
+                      <li>Click &quot;Play&quot; to quickly join the server.</li>
+                    </ul>
+                  </>
+                ) : ''}
+                <br />
+                If you&apos;re having issues connecting,&nbsp;
+                check out our connection troubleshooting guide.
+              </>
+          )}
+          />
+          <QandA
+            question={`What is the server IP for ${data.name.substr(0, data.name.lastIndexOf('Minecraft Server'))}?`}
+            answer={(
+              <>
+                {data.javaIP || data.serverIP ? (
+                  <>
+                    BumbleCraft&apos;s Java Edition IP Address is
+                    {' '}
+                    <b>{data.javaIP || data.bedrockIP}</b>
+                    .
+                  </>
+                ) : ''}
+                {data.bedrockIP ? (
+                  <>
+                    <br />
+                    The Bedrock IP Address is
+                    {' '}
+                    <b>{data.bedrockIP}</b>
+                    {' '}
+                    and the port is
+                    {' '}
+                    <b>{data.bedrockPort}</b>
+                    .
+                  </>
+                ) : ''}
+              </>
+          )}
+          />
+          <QandA
+            question={`Does ${data.name.substr(0, data.name.lastIndexOf('Minecraft Server'))} have a PE server?`}
+            answer={data.bedrockIP ? (
+              <>
+                <b>Yes</b>
+                , BumbleCraft is a Bedrock-compatible server!
+                You can join it using a PS4, Xbox, Android, iOS (iPod Touch, iPhone, iPad),Windows
+                10 PC, or any other device supporting Minecraft Bedrock / Pocket Edition (MCPE).
+              </>
+            ) : (
+              <>
+                No. You can only join McYAY using Minecraft Java Edition.
+              </>
+            )}
+          />
+          <QandA
+            question={`Is ${data.name.substr(0, data.name.lastIndexOf('Minecraft Server'))} free to play?`}
+            answer={(
+              <>
+                Yes - As are all
+                {' '}
+                <Link to="/" className="underline text-amber-400">Minecraft servers</Link>
+                {' '}
+                listed on MCS.
+              </>
+            )}
+          />
         </div>
       </div>
     ) : <Loading />

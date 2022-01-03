@@ -5,5 +5,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Quicksand:wght@400;500&display=swap');
 
 .faq a {
-    @apply font-medium text-amber-500 underline
+    @apply font-medium text-amber-400 underline
 }

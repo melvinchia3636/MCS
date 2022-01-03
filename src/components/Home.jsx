@@ -13,7 +13,7 @@ function Section({ data, title, desc }) {
       <p className="text-lg tracking-wide">{desc}</p>
       <div className="grid grid-cols-2 gap-6 mt-8">
         {data.length ? data.map((e) => (
-          <Link to={`/server/${e.id}`} className="w-full overflow-hidden rounded-xl shadow-[0_6px_12px_rgba(0,0,0,.15)] bg-white hover:duration-100 hover:bg-slate-50 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
+          <Link to={`/server/${e.id}`} className="w-full overflow-hidden rounded-xl shadow-[0_4px_6px_rgba(0,0,0,.10)] bg-white hover:duration-100 hover:bg-slate-50 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
             <div className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -88,17 +88,17 @@ function SmartSearchPromo() {
 function QandA({ question, answer, showContent }) {
   const [isContentShow, toggleContent] = React.useState(showContent || false);
   return (
-    <div className="text-slate-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 font-[QuickSand] p-6 rounded-md shadow-md">
+    <div className="text-slate-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 font-[QuickSand] p-6 rounded-md shadow-[0_4px_6px_rgba(0,0,0,.10)]">
       <div
         aria-hidden="true"
         onKeyDown={() => toggleContent(!isContentShow)}
-        className={`w-full flex justify-between items-center cursor-pointer transition-all duration-500 ${isContentShow ? 'mb-3 text-amber-500' : ''}`}
+        className={`w-full flex justify-between items-center cursor-pointer transition-all duration-500 ${isContentShow ? 'mb-3 text-amber-400' : ''}`}
         onClick={() => toggleContent(!isContentShow)}
       >
-        <h3 className={`font-medium transition-all duration-500 text-${isContentShow ? '2' : ''}xl`}>{question}</h3>
+        <h3 className={`font-medium transition-all select-none duration-500 text-${isContentShow ? '2' : ''}xl`}>{question}</h3>
         <Icon icon={`uil:${isContentShow ? 'minus' : 'angle-down'}`} className="w-6 h-6" />
       </div>
-      <div className={`text-lg overflow-hidden transition-all duration-500 ${isContentShow ? 'max-h-96' : 'max-h-0'}`}>
+      <div className={`text-lg overflow-hidden transition-all duration-500 ${isContentShow ? 'max-h-[32rem]' : 'max-h-0'}`}>
         {answer}
       </div>
     </div>
@@ -132,10 +132,10 @@ function FAQ() {
               Source:
               {' '}
               <a href="/">Wikipedia</a>
-              ,
+              ,&nbsp;
               <a href="/">Minecraft</a>
             </>
-)}
+          )}
         />
         <QandA
           question="What is a Minecraft Server List?"
@@ -156,7 +156,7 @@ function FAQ() {
               {' '}
               <a href="/">Fandom</a>
             </>
-)}
+          )}
         />
         <QandA
           question="Does Minecraft have an official multiplayer server?"
@@ -166,13 +166,15 @@ function FAQ() {
               {' '}
               <a href="/">Mojang</a>
               {' '}
-              (Minecraft&apos;s parent company) has officially partnered with a few servers like
+              (Minecraft&apos;s parent company) has officially
+              partnered with a few servers like&nbsp;
               <a href="/">Mineplex</a>
               . Additionally, there are servers hosted by Mojang, called Minecraft Realms. Those,
-              however, are limited in gameplay features; therefore, we wouldn&apos;t recommend them.
+              however, are limited in gameplay features;
+              therefore, we wouldn&apos;t recommend them.&nbsp;
               <a href="/">Community-hosted</a>
               {' '}
-              servers usually offer more options, better performance, and
+              servers usually offer more options, better performance, and&nbsp;
               <a href="/">cost less</a>
               .
               <br />
@@ -180,10 +182,10 @@ function FAQ() {
               Source:
               {' '}
               <a href="/">XBOX</a>
-              ,
+              ,&nbsp;
               <a href="/">Minecraft</a>
             </>
-)}
+          )}
         />
         <QandA
           question="How can I find a Minecraft Server IP?"
@@ -196,7 +198,7 @@ function FAQ() {
               feature to find a server IP for their specific device (whether that&apos;s a PC, a
               smartphone, or a console), or go through our server list.
             </>
-)}
+          )}
         />
         <QandA
           question="What should I know before joining a server?"
@@ -221,11 +223,11 @@ function FAQ() {
 
                 </li>
                 <li>
-                  Running a server costs money. If you like it, consider donating to support it
+                  Running a server costs money. If you like it, consider donating to support it.
                 </li>
               </ol>
             </>
-)}
+          )}
         />
         <QandA
           question="What games can I play on MC servers?"
@@ -237,7 +239,7 @@ function FAQ() {
               a survival vanilla server will have you hunt and mine day and night in order to
               survive the zombies and skeletons!
             </>
-)}
+          )}
         />
         <QandA
           question="Where can I learn more about Minecraft?"
@@ -246,13 +248,13 @@ function FAQ() {
               You can visit the
               {' '}
               <a href="/">official Minecraft website</a>
-              , or read through the
+              , or read through the&nbsp;
               <a href="/">Minecraft Wiki</a>
               . If you ever have any questions about Minecraft or Minecraft Servers, feel free to
               contact our support through the contact us button, or by joining our Discord server
               and creating a support ticket.
             </>
-)}
+          )}
         />
         <QandA
           question="How can I play on a Minecraft server?"
@@ -260,16 +262,17 @@ function FAQ() {
             <>
               Find a server you like and copy it&apos;s IP address. Once you&apos;ve copied the
               IP, start Minecraft, click &quot;Multiplayer&quot;, then &quot;Add Server&quot;.
-              Then, paste the server&apos;s address in the IP Address field. Click &quot;Done&
-              quot; to confirm, you will then be taken back to the servers list. You can now click
-              &uqot;Join Server&quot; to play on it. Here&apos;s a
+              Then, paste the server&apos;s address in the IP Address
+              field. Click &quot;Done&quot; to confirm,
+              you will then be taken back to the servers list. You can now click
+              &quot;Join Server&quot; to play on it. Here&apos;s a
               {' '}
               <a href="/">complete video tutorial</a>
-              . If you&apos;re facing any issues connecting, here are some
+              . If you&apos;re facing any issues connecting, here are some&nbsp;
               <a href="/">troubleshooting tips</a>
               .
             </>
-)}
+          )}
         />
       </div>
     </div>
@@ -486,3 +489,4 @@ function Home() {
 }
 
 export default Home;
+export { QandA };

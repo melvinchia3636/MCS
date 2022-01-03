@@ -1,22 +1,27 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
 
 function AboutUs() {
   return (
     <div className="text-slate-700 dark:text-white w-[28rem] transition-all duration-500">
       <h2 className="text-2xl font-medium mb-3">About Us</h2>
       <p>
-        This site is published by Melvin Chia, aka The Silly Coder. Here are his
+        This site is published by
         {' '}
-        <b className="underline">Facebook profile</b>
+        <a href="https://minecraft.buzz" target="_blank" rel="noopener noreferrer" className="underline">Stelios Mac</a>
+        , and remade by Melvin Chia, aka The Silly Coder.&nbsp;
+        Here are his
+        {' '}
+        <a href="https://facebook.com/TheSillyCoder" target="_blank" rel="noopener noreferrer" className="underline">Facebook profile</a>
         {' '}
         and his
         {' '}
-        <b className="underline">Github page</b>
+        <a href="https://github.com/melvinchia3636" target="_blank" rel="noopener noreferrer" className="underline">Github page</a>
         {' '}
         . To learn more about the website and the people running it, visit the
         {' '}
-        <b className="underline">About page</b>
+        <Link to="/about" className="underline">About page</Link>
         .
       </p>
     </div>
