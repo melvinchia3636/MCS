@@ -446,7 +446,7 @@ function Details() {
         <h2 className="text-slate-400 text-2xl font-medium mt-12">Server Reviews</h2>
         <div className="flex flex-col gap-4 mt-4">
           {review.length ? review.map((e) => (
-            <div className="text-slate-700 bg-white p-4 rounded-lg shadow-[0_4px_6px_rgba(0,0,0,.10)]">
+            <div className="text-slate-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 p-4 rounded-lg shadow-[0_4px_6px_rgba(0,0,0,.10)]">
               <div className="flex gap-4 items-center">
                 <img src={e.avatar} className="rounded-md" alt={e.name} />
                 <div>

@@ -1,5 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const path = require('path');
 
 module.exports = {
   devServer: {
@@ -47,11 +50,14 @@ module.exports = {
     }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
-      filename: './index.html',
+      filename: '../index.html',
       favicon: './src/favicon.png',
     }),
+    new CleanWebpackPlugin(),
   ],
   output: {
-    publicPath: '/', // <- this is the important line along with historyApiFallback = true in the dev server config
+    path: path.resolve(__dirname, 'dist/static'),
+    publicPath: 'static/',
+    filename: '[name].[chunkhash:4].js',
   },
 };
