@@ -161,7 +161,7 @@ function CatContent({
                   ))}
                 </div>
               </div>
-              <img alt={e.ip} src={e.banner} className="w-full object-fill" />
+              <img alt={e.ip} src={e.banner} className="w-full object-fill flex items-center justify-center" />
             </Link>
           )) : ''}
         </div>

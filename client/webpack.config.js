@@ -50,14 +50,13 @@ module.exports = {
     }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
-      filename: '../index.html',
+      filename: './index.html',
       favicon: './src/favicon.png',
     }),
     new CleanWebpackPlugin(),
   ],
   output: {
-    path: path.resolve(__dirname, 'dist/static'),
-    publicPath: 'static/',
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash:4].js',
   },
 };

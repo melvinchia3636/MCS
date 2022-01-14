@@ -14,7 +14,7 @@ function Search() {
   }, [location]);
 
   return (
-    <div className="w-full min-h-[52vh] font-[QuickSand] flex flex-col p-20 items-center justify-center gap-4">
+    <div className="w-full min-h-[52vh] font-[QuickSand] flex flex-col items-center justify-center gap-4">
       {searchQuery ? <SearchResults /> : <SearchInput />}
     </div>
   );

@@ -22,7 +22,12 @@ function CountryChooser({
             )
             .map((([e, f]) => (
               <Link
-                to={`?country=${f}`}
+                to={(() => {
+                  const url = new URL(window.location.href);
+                  Array.from(url.searchParams.entries()).forEach(([k]) => (k === 'q' ? null : url.searchParams.delete(k)));
+                  url.searchParams.append('country', f);
+                  return url.pathname + url.search;
+                })()}
                 className="py-4 px-1 flex items-center gap-2 text-lg border-b text-slate-700 border-slate-200 dark:text-white dark:border-zinc-500"
               >
                 <span className={`fp ${f?.toLowerCase()} fp-large !w-7 !h-7 fp-square rounded-full`} />
