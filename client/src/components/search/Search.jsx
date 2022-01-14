@@ -1,5 +1,4 @@
 /* eslint-disable import/extensions */
-import { Icon } from '@iconify/react';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import SearchInput from './SearchInput.jsx';
