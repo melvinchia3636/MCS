@@ -62,7 +62,7 @@ const getData = async (id) => {
     .../^(?<status>Online|Offline)\s+(-|\|)\s+(?<votes>\d+)\s+Vote\(s\),\s+(?<reviewCount>(?:\d+|No))\s+Review(?:s|\(s\))(?:,\s+Rated:\s+(?<rate>\d)\/5)?./.exec(html.querySelector('section header #vote-line').innerText.trim()).groups,
     website: Array.from(html.querySelectorAll('a.btn.btn-light.p-2.p-sm-3.py-3')).filter((e) => e.innerText.trim() === 'Website').shift()?.href || null,
     discord: Array.from(html.querySelectorAll('a.btn.btn-light.p-2.p-sm-3.py-3')).filter((e) => e.innerText.trim() === 'Discord').shift()?.href || null,
-    ...cleanupData(html.querySelectorAll('#datadiv > div')),
+    ...cleanupData(html.querySelectorAll('#servertable > div')),
     desc: html.querySelectorAll('section')[1].querySelector('p').innerHTML.trim(),
     similar: Array.from(html.querySelectorAll('.server-listing')).map((e) => ({
       name: e.querySelector('h3').innerText.trim(),

@@ -29,10 +29,10 @@ function Navbar({ setTheme, theme }) {
             Servers
             <Icon icon="uil:angle-down" className="w-5 h-5 mt-1" />
           </button>
-          <a href="/">Search</a>
-          <a href="/">Blog</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
+          <Link to="/search">Search</Link>
+          <Link to="/">Blog</Link>
+          <Link to="/">About</Link>
+          <Link to="/">Contact</Link>
         </div>
         <button type="button" className="p-3 rounded-md bg-amber-400 shadow-md" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -16,6 +16,7 @@ import Version from './components/listings/Version.jsx';
 import General from './components/listings/General.jsx';
 
 import Details from './components/details/Details.jsx';
+import Search from './components/search/Search.jsx';
 
 function Index() {
   const [theme, setTheme] = React.useState(localStorage.theme);
@@ -51,8 +52,8 @@ function Index() {
             .map((e) => <Route path={`/${e}`} element={<General category={e} />} />)}
           {['java', 'bedrock', 'new', 'popular', 'whitelist']
             .map((e) => <Route path={`/${e}/:page`} element={<General category={e} />} />)}
-
           <Route path="/server/:id" element={<Details />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
         <Footer />
       </BrowserRouter>
