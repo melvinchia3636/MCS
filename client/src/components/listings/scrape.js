@@ -8,6 +8,7 @@ const getData = async (url, currentPage) => {
     id: e.querySelector('a').href.split('/').pop(),
     thumbnail: e.querySelector('img[src*=favicon]').src,
     banner: e.querySelector('img[src*=banner]')?.src,
+    video: e.querySelector('video source')?.dataset.src,
     ip: e.querySelector('.ip-block').innerText,
     version: e.querySelector("span[title='Server Version']").innerText.trim(),
     gamemode: e.querySelector("span[title='Main Gamemode']").innerText.trim(),

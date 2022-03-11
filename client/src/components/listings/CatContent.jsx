@@ -161,7 +161,12 @@ function CatContent({
                   ))}
                 </div>
               </div>
-              <img alt={e.ip} src={e.banner} className="w-full object-fill flex items-center justify-center" />
+              {e.banner && <img alt={e.ip} src={e.banner} className="w-full object-fill" />}
+              {e.video && (
+              <video autoPlay loop muted>
+                <source src={e.video} />
+              </video>
+              )}
             </Link>
           )) : ''}
         </div>
