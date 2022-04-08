@@ -30,7 +30,7 @@ function CountryChooser({
                 })()}
                 className="py-4 px-1 flex items-center gap-2 text-lg border-b text-slate-700 border-slate-200 dark:text-white dark:border-zinc-500"
               >
-                <span className={`fp ${f?.toLowerCase()} fp-large !w-7 !h-7 fp-square rounded-full`} />
+                <span className={`fp ${f?.toLowerCase()} fp-large !w-7 !h-7 flex-shrink-0 fp-square rounded-full`} />
                 {e}
               </Link>
             )))}
