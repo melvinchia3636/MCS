@@ -2,9 +2,9 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
-import Loading from '../utils/Loading.jsx';
+import Loading from '../../utils/components/Loading.jsx';
 import CatContent from '../listings/CatContent.jsx';
-import getData from '../listings/scrape.js';
+import getData from '../listings/lib/getData.js';
 
 function SearchResults() {
   const searchParams = useSearchParams();

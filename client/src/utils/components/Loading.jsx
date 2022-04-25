@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import Lottie from 'react-lottie';
-import loadingAnim from './loading.json';
+import loadingAnim from '../animations/loading.json';
 
 function Loading() {
   return (

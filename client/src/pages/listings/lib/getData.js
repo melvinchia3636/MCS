@@ -1,6 +1,6 @@
 import countries from './countries.json';
 
-const getData = async (url, currentPage) => {
+export default async function getData(url, currentPage) {
   const raw = await fetch(url, { cache: 'no-store' }).then((res) => res.text());
   const HTMLParser = new DOMParser();
   const html = HTMLParser.parseFromString(raw, 'text/html');
@@ -25,6 +25,4 @@ const getData = async (url, currentPage) => {
   const c = Array.from(html.querySelectorAll('.dropdown-menu a')).map(((e) => e.href.split('=').pop())).sort().filter((e) => Object.keys(countries).includes(e))
     .map((e) => [countries[e], e]);
   return [d, t, c];
-};
-
-export default getData;
+}

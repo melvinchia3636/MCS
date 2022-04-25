@@ -3,10 +3,10 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-import Loading from '../utils/Loading.jsx';
+import Loading from '../../utils/components/Loading.jsx';
 import CatContent from './CatContent.jsx';
 
-import getData from './scrape.js';
+import getData from './lib/getData.js';
 
 function General({ category }) {
   const searchParams = useSearchParams();

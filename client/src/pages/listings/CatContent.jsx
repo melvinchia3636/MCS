@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
 import 'flagpack/src/flagpack.scss';
@@ -19,7 +19,7 @@ function CatContent({
 
   return (
     <>
-      <div className="py-12 min-h-[52vh] px-16 font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500">
+      <div className="py-12 min-h-[52vh] px-16 text-slate-700 dark:text-white transition-all duration-500">
         <h1 className="font-medium text-4xl mb-3 text-amber-400">{title.title}</h1>
         <p className="text-lg tracking-wide">{title.desc}</p>
         <div className="mt-4 flex gap-3">
@@ -222,13 +222,5 @@ function CatContent({
     </>
   );
 }
-
-CatContent.propTypes = {
-  data: PropTypes.objectOf.isRequired,
-  title: PropTypes.objectOf.isRequired,
-  hasSorting: PropTypes.bool.isRequired,
-  currentPage: PropTypes.arrayOf(PropTypes.number).isRequired,
-  countries: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-};
 
 export default CatContent;

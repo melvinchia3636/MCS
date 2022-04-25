@@ -4,11 +4,11 @@ import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
 
-import Loading from './utils/Loading.jsx';
+import Loading from '../utils/components/Loading.jsx';
 
 function Section({ data, title, desc }) {
   return (
-    <div className="py-12 font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500">
+    <div className="py-12 text-slate-700 dark:text-white transition-all duration-500">
       <h1 className="font-medium text-4xl mb-3">{title}</h1>
       <p className="text-lg tracking-wide">{desc}</p>
       <div className="grid grid-cols-2 gap-6 mt-8">
@@ -74,7 +74,7 @@ Section.propTypes = {
 
 function SmartSearchPromo() {
   return (
-    <div className="w-full font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500 rounded-xl shadow-md flex-col p-12 my-12 bg-slate-100 dark:bg-zinc-600 flex justify-center items-center">
+    <div className="w-full text-slate-700 dark:text-white transition-all duration-500 rounded-xl shadow-md flex-col p-12 my-12 bg-slate-100 dark:bg-zinc-600 flex justify-center items-center">
       <h2 className="text-4xl font-medium mb-2">Search for a Server</h2>
       <p className="text-lg">
         Try out our brand new
@@ -93,7 +93,7 @@ function SmartSearchPromo() {
 function QandA({ question, answer, showContent }) {
   const [isContentShow, toggleContent] = React.useState(showContent || false);
   return (
-    <div className="text-slate-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 font-[QuickSand] p-6 rounded-md shadow-[0_4px_6px_rgba(0,0,0,.10)]">
+    <div className="text-slate-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 p-6 rounded-md shadow-[0_4px_6px_rgba(0,0,0,.10)]">
       <div
         aria-hidden="true"
         onKeyDown={() => toggleContent(!isContentShow)}
@@ -118,7 +118,7 @@ QandA.propTypes = {
 
 function FAQ() {
   return (
-    <div className="text-slate-700 dark:text-white transition-all duration-500 faq font-[QuickSand] my-12">
+    <div className="text-slate-700 dark:text-white transition-all duration-500 faq my-12">
       <h1 className="font-medium text-4xl mb-6">Frequently Asked Questions</h1>
       <div className="flex flex-col gap-3">
         <QandA
@@ -286,7 +286,7 @@ function FAQ() {
 
 function JoinServerPromo() {
   return (
-    <div className="w-full font-[QuickSand] text-slate-700 dark:text-white transition-all duration-500 rounded-xl shadow-md flex-col p-12 my-12 bg-slate-100 dark:bg-zinc-600 flex justify-center items-center">
+    <div className="w-full text-slate-700 dark:text-white transition-all duration-500 rounded-xl shadow-md flex-col p-12 my-12 bg-slate-100 dark:bg-zinc-600 flex justify-center items-center">
       <h2 className="text-4xl font-medium mb-2">Complete MC server list</h2>
       <p className="text-lg text-center">
         <b>Not quite what you&apos;re looking for?</b>

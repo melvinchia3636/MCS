@@ -54,7 +54,7 @@ function SocialMedia() {
       <p>
         View website
         {' '}
-        <a href="/" className="font-medium underline">source code</a>
+        <a href="https://github.com/melvinchia3636/MCS" target="_blank" rel="noreferrer" className="font-medium underline">source code</a>
       </p>
     </div>
   );
@@ -62,7 +62,7 @@ function SocialMedia() {
 
 function Footer() {
   return (
-    <footer className="w-full bg-slate-100 dark:bg-zinc-600 text-slate-700 dark:text-white font-[QuickSand] px-16 py-8 transition-all duration-500">
+    <footer className="w-full bg-slate-100 dark:bg-zinc-600 text-slate-700 dark:text-white px-16 py-8 transition-all duration-500">
       <div className="flex justify-between">
         <AboutUs />
         <ContactInfo />

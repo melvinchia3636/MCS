@@ -5,18 +5,18 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style.css';
 
-import Home from './components/Home.jsx';
+import Home from './pages/Home.jsx';
 
-import Navbar from './components/utils/Navbar.jsx';
-import Footer from './components/utils/Footer.jsx';
-import NotFound from './components/utils/404.jsx';
+import Navbar from './utils/components/Navbar.jsx';
+import Footer from './utils/components/Footer.jsx';
+import NotFound from './utils/components/404.jsx';
 
-import Category from './components/listings/Category.jsx';
-import Version from './components/listings/Version.jsx';
-import General from './components/listings/General.jsx';
+import Category from './pages/listings/Category.jsx';
+import Version from './pages/listings/Version.jsx';
+import General from './pages/listings/General.jsx';
 
-import Details from './components/details/Details.jsx';
-import Search from './components/search/Search.jsx';
+import Details from './pages/details';
+import Search from './pages/search/Search.jsx';
 
 function Index() {
   const [theme, setTheme] = React.useState(localStorage.theme);
@@ -39,7 +39,7 @@ function Index() {
   }, [theme]);
 
   return (
-    <main className="bg-white dark:bg-zinc-700 transition-all duration-500">
+    <main className="bg-white dark:bg-zinc-700 transition-all duration-500 font-[Quicksand] font-light">
       <BrowserRouter>
         <Navbar setTheme={setTheme} theme={theme} />
         <Routes>

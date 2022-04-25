@@ -1,19 +1,18 @@
 /* eslint-disable import/extensions */
-/* eslint-disable global-require */
 import React from 'react';
 import {
-  useParams, useSearchParams, useLocation,
+  useSearchParams, useLocation, useParams,
 } from 'react-router-dom';
 
-import Loading from '../utils/Loading.jsx';
+import Loading from '../../utils/components/Loading.jsx';
 import CatContent from './CatContent.jsx';
 
-import getData from './scrape.js';
+import getData from './lib/getData.js';
 
-function Category() {
-  const params = useParams();
+function Version() {
   const searchParams = useSearchParams();
-  const loc = useLocation();
+  const params = useParams();
+  const location = useLocation();
 
   const [data, setData] = React.useState([]);
   const [title, setTitle] = React.useState({
@@ -31,13 +30,13 @@ function Category() {
     currentPage = parseInt(searchParams[0].get('page'), 10) || 1;
     window.scrollTo({ top: 0 });
 
-    const [d, t, c] = await getData(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/category/${params.category}/${currentPage !== 1 ? currentPage : ''}&type=${new URL(window.location.href).searchParams.get('type')}&order_by=${['online_players', 'votes', 'server_id'][parseInt(new URL(window.location.href).searchParams.get('sort'), 10)]}&filter_country=${country}`, currentPage);
+    const [d, t, c] = await getData(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/version/${params.version}/${currentPage}&type=${new URL(window.location.href).searchParams.get('type')}&order_by=${['online_players', 'votes', 'server_id'][parseInt(new URL(window.location.href).searchParams.get('sort'), 10)]}&filter_country=${country}`, currentPage);
     setData(d);
     setTitle(t);
     setCountries(c);
   };
 
-  React.useEffect(fetchData, [loc]);
+  React.useEffect(fetchData, [location]);
 
   return (
     data.length ? (
@@ -52,4 +51,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default Version;
