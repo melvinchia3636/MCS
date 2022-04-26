@@ -4,7 +4,7 @@
 
 ## The Problem
 
-Minecraft allows players to set up a server freely and play together in it. After more than 10 years of evolution, countless amazing servers have emerged around the world. At the same time, lots of community members have created websites that collect information about these servers and players can browse and search for their desired server. As a Minecraft player, I would really like to make one myself as well.
+Minecraft allows players to set up a server freely and play together in it. After more than 10 years of evolution, countless amazing servers have emerged around the world. At the same time, lots of community members have created websites that collect information about these servers so that players can browse and search for their desired server. As a Minecraft player, I would really like to make one myself as well.
 
 ## The Solution
 
