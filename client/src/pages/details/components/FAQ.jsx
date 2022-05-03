@@ -1,15 +1,16 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-nested-ternary */
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { DetailsContext } from '..';
-import { QandA } from '../../Home';
+import QandA from '../../home/components/QandA';
 
 function FAQ() {
   const { data } = useContext(DetailsContext);
 
   return (
     <>
-      <h2 className="text-slate-400 text-2xl font-medium mb-4 mt-12">Frequently Asked Questions</h2>
+      <h2 className="text-zinc-400 text-2xl font-medium mb-4 mt-12">Frequently Asked Questions</h2>
       <div className="flex flex-col gap-4">
         <QandA
           question={`How do I join ${data.name.substr(0, data.name.lastIndexOf('Minecraft Server'))}?`}

@@ -32,7 +32,7 @@ function Details() {
   return (
     <DetailsContext.Provider value={{ data, setData }}>
       {JSON.stringify(data) !== '{}' ? (
-        <div className="py-12 min-h-[52vh] px-16 text-slate-700 dark:text-white transition-all duration-500">
+        <div className="py-12 min-h-[52vh] px-16 text-zinc-700 dark:text-white transition-all duration-500">
           <Header />
           <Buttons />
           <ServerInfo />

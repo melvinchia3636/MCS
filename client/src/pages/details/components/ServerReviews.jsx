@@ -47,10 +47,10 @@ function ServerReviews() {
 
   return (
     <>
-      <h2 className="text-slate-400 text-2xl font-medium mt-12">Server Reviews</h2>
+      <h2 className="text-zinc-400 text-2xl font-medium mt-12">Server Reviews</h2>
       <div className="flex flex-col gap-4 mt-4">
         {review.length ? review.map((e) => (
-          <div className="text-slate-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 p-4 rounded-lg shadow-[0_4px_6px_rgba(0,0,0,.10)]">
+          <div className="text-zinc-700 dark:text-white bg-white dark:bg-zinc-600 transition-all duration-500 p-4 rounded-lg shadow-[0_4px_6px_rgba(0,0,0,.10)]">
             <div className="flex gap-4 items-center">
               <img src={e.avatar} className="rounded-md" alt={e.name} />
               <div>
@@ -59,7 +59,7 @@ function ServerReviews() {
                   {Array(parseInt(e.rating, 10) || 0).fill(0).map(() => <div className="w-2.5 h-2.5 bg-amber-400 rounded-full" />)}
                   {Array(5 - (parseInt(e.rating, 10) || 0)).fill(0).map(() => <div className="w-2.5 h-2.5 border-2 border-amber-400 rounded-full" />)}
                 </div>
-                <p className="text-slate-400 font-medium mt-1">{e.date}</p>
+                <p className="text-zinc-400 font-medium mt-1">{e.date}</p>
               </div>
             </div>
             <p className="mt-4 text-lg">{e.content}</p>

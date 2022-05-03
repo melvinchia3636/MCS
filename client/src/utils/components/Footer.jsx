@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function AboutUs() {
   return (
-    <div className="text-slate-700 dark:text-white w-[28rem] transition-all duration-500">
+    <div className="text-zinc-700 dark:text-white w-[28rem] transition-all duration-500">
       <h2 className="text-2xl font-medium mb-3">About Us</h2>
       <p>
         This site is published by
@@ -30,22 +30,22 @@ function AboutUs() {
 
 function ContactInfo() {
   return (
-    <div className="text-slate-700 dark:text-white transition-all duration-500">
+    <div className="text-zinc-700 dark:text-white transition-all duration-500">
       <h2 className="text-2xl font-medium mb-3">Contact Info</h2>
       <p>
         Email:
         <span className="font-medium"> info@thecodeblog.net</span>
       </p>
-      <a href="/" className="px-12 py-2 font-medium border-2 mt-4 border-slate-700 dark:border-white transition-all duration-500 text-lg inline-flex items-center justify-center">Contact Us</a>
+      <a href="/" className="px-12 py-2 font-medium border-2 mt-4 border-zinc-700 dark:border-white transition-all duration-500 text-lg inline-flex items-center justify-center">Contact Us</a>
     </div>
   );
 }
 
 function SocialMedia() {
   return (
-    <div className="text-slate-700 dark:text-white transition-all duration-500">
+    <div className="text-zinc-700 dark:text-white transition-all duration-500">
       <h2 className="text-2xl font-medium">Social Media</h2>
-      <div className="flex gap-8 text-slate-700 dark:text-white transition-all duration-500 my-4">
+      <div className="flex gap-8 text-zinc-700 dark:text-white transition-all duration-500 my-4">
         <a href="/" aria-label="link"><Icon icon="uil:facebook" className="w-7 h-7" /></a>
         <a href="/" aria-label="link"><Icon icon="uil:instagram" className="w-7 h-7" /></a>
         <a href="/" aria-label="link"><Icon icon="uil:twitter" className="w-7 h-7" /></a>
@@ -62,7 +62,7 @@ function SocialMedia() {
 
 function Footer() {
   return (
-    <footer className="w-full bg-slate-100 dark:bg-zinc-600 text-slate-700 dark:text-white px-16 py-8 transition-all duration-500">
+    <footer className="w-full bg-zinc-100 dark:bg-zinc-600 text-zinc-700 dark:text-white px-16 py-8 transition-all duration-500">
       <div className="flex justify-between">
         <AboutUs />
         <ContactInfo />

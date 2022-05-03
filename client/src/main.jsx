@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style.css';
 
-import Home from './pages/Home.jsx';
+import Home from './pages/home';
 
 import Navbar from './utils/components/Navbar.jsx';
 import Footer from './utils/components/Footer.jsx';
@@ -16,7 +16,7 @@ import Version from './pages/listings/Version.jsx';
 import General from './pages/listings/General.jsx';
 
 import Details from './pages/details';
-import Search from './pages/search/Search.jsx';
+import Search from './pages/search';
 
 function Index() {
   const [theme, setTheme] = React.useState(localStorage.theme);

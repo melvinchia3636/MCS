@@ -15,7 +15,7 @@ import Version from './components/Version';
 export default function ServerInfo() {
   return (
     <>
-      <h2 className="text-slate-400 text-2xl font-medium">Server Information</h2>
+      <h2 className="text-zinc-400 text-2xl font-medium">Server Information</h2>
       <ServerIP />
       <BedrockIP />
       <ServerType />

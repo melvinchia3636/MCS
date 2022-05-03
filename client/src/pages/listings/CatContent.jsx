@@ -19,17 +19,17 @@ function CatContent({
 
   return (
     <>
-      <div className="py-12 min-h-[52vh] px-16 text-slate-700 dark:text-white transition-all duration-500">
+      <div className="py-12 min-h-[52vh] px-16 text-zinc-700 dark:text-white transition-all duration-500">
         <h1 className="font-medium text-4xl mb-3 text-amber-400">{title.title}</h1>
         <p className="text-lg tracking-wide">{title.desc}</p>
         <div className="mt-4 flex gap-3">
           {hasSorting ? (
-            <button type="button" className="flex-grow relative font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleSortingChooser(!isSortingChooserOpen)}>
+            <button type="button" className="flex-grow relative font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-zinc-100 hover:bg-zinc-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleSortingChooser(!isSortingChooserOpen)}>
               <Icon icon="uil:sort" className="w-6 h-6" />
               Sort by:
               {' '}
               {['Players', 'Votes', 'Latest'][new URL(window.location.href).searchParams.get('sort')] || 'None'}
-              <div className={`w-full overflow-hidden bg-white text-slate-700 dark:bg-zinc-600 dark:text-white absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isSortingChooserOpen ? 'max-h-56 py-5' : 'max-h-0'}`}>
+              <div className={`w-full overflow-hidden bg-white text-zinc-700 dark:bg-zinc-600 dark:text-white absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isSortingChooserOpen ? 'max-h-56 py-5' : 'max-h-0'}`}>
                 <Link
                   to={(() => {
                     const url = new URL(window.location.toString());
@@ -37,7 +37,7 @@ function CatContent({
                     url.searchParams.delete('page');
                     return url.pathname + url.search;
                   })()}
-                  className="border-b border-slate-100 pb-4 mb-4 flex items-center gap-2"
+                  className="border-b border-zinc-100 pb-4 mb-4 flex items-center gap-2"
                 >
                   <Icon
                     icon="uil:users-alt"
@@ -52,7 +52,7 @@ function CatContent({
                     url.searchParams.delete('page');
                     return url.pathname + url.search;
                   })()}
-                  className="border-b border-slate-100 pb-4 mb-4 flex items-center gap-2"
+                  className="border-b border-zinc-100 pb-4 mb-4 flex items-center gap-2"
                 >
                   <Icon icon="uil:thumbs-up" className="w-6 h-6" />
                   Votes
@@ -72,19 +72,19 @@ function CatContent({
               </div>
             </button>
           ) : ''}
-          <button onClick={() => toggleCountryChooser(true)} type="button" href={data.website} target="_blank" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
+          <button onClick={() => toggleCountryChooser(true)} type="button" href={data.website} target="_blank" className="flex-grow font-medium py-4 text-lg flex justify-center items-center gap-2 rounded-md shadow-md bg-zinc-100 hover:bg-zinc-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500">
             <Icon icon="uil:globe" className="w-6 h-6" />
             Country:
             {' '}
             {currentCountry ? <span className={`fp fp-square fp-large !w-6 !h-6 rounded-full ${currentCountry.toLowerCase()}`} /> : ''}
             {(countries.filter((e) => e[1] === currentCountry)[0] || [])[0] || 'All'}
           </button>
-          <button type="button" className="flex-grow font-medium py-4 text-lg flex relative justify-center items-center gap-2 rounded-md shadow-md bg-slate-100 hover:bg-slate-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleServerTypeChooser(!isServerTypeChooserOpen)}>
+          <button type="button" className="flex-grow font-medium py-4 text-lg flex relative justify-center items-center gap-2 rounded-md shadow-md bg-zinc-100 hover:bg-zinc-200 hover:duration-200 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500" onClick={() => toggleServerTypeChooser(!isServerTypeChooserOpen)}>
             <Icon icon="uil:server" className="w-6 h-6" />
             Server Type:
             {' '}
             {['Java', 'Bedrock / PE'][parseInt(new URL(window.location.toString()).searchParams.get('type'), 10)] || 'All'}
-            <div className={`w-full overflow-hidden bg-white text-slate-700 dark:bg-zinc-600 dark:text-white absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isServerTypeChooserOpen ? 'max-h-32 py-5' : 'max-h-0'}`}>
+            <div className={`w-full overflow-hidden bg-white text-zinc-700 dark:bg-zinc-600 dark:text-white absolute bottom-0 left-0 transform translate-y-full shadow-md rounded-lg px-6 transition-all flex flex-col duration-500 ${isServerTypeChooserOpen ? 'max-h-32 py-5' : 'max-h-0'}`}>
               <Link
                 to={(() => {
                   const url = new URL(window.location.toString());
@@ -92,7 +92,7 @@ function CatContent({
                   url.searchParams.delete('page');
                   return url.pathname + url.search;
                 })()}
-                className="border-b border-slate-100 pb-4 mb-4 flex items-center gap-2"
+                className="border-b border-zinc-100 pb-4 mb-4 flex items-center gap-2"
               >
                 <Icon
                   icon="grommet-icons:java"
@@ -120,18 +120,16 @@ function CatContent({
             <Link
               to={`/server/${e.id}`}
               className="block w-full overflow-hidden rounded-xl
-             bg-white hover:duration-100 hover:bg-slate-50 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500"
+             bg-white hover:duration-100 hover:bg-zinc-50 dark:hover:bg-zinc-500 dark:bg-zinc-600 transition-all duration-500"
             >
               <div className="p-6">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 w-full">
+                  <div className="flex items-center gap-4 w-8/12">
                     <img alt={e.ip} src={e.thumbnail} className="w-12 h-12 rounded-md" />
-                    <div className="flex flex-col w-10/12">
-                      <p className="font-medium text-2xl overflow-hidden w-[99%] overflow-ellipsis">{e.ip}</p>
-                      <div className="flex gap-1 mt-1">
-                        {Array(e.rating).fill(0).map(() => <div className="w-2.5 h-2.5 bg-amber-400 rounded-full" />)}
-                        {Array(5 - e.rating).fill(0).map(() => <div className="w-2.5 h-2.5 border-2 border-amber-400 rounded-full" />)}
-                      </div>
+                    <div className="flex flex-col w-full">
+                      <p className="font-medium text-2xl w-[99%] truncate">
+                        {e.ip}
+                      </p>
                     </div>
                   </div>
                   <div className={`flex items-center gap-1 rounded-full ${e.status === 'Online' ? 'bg-amber-400' : 'bg-rose-500'} pr-4 pl-3 font-medium py-1 shadow-sm text-white`}>
@@ -183,7 +181,7 @@ function CatContent({
               >
                 <Icon icon="uil:angle-double-left" className="w-8 h-8 text-amber-400" />
               </Link>
-            ) : <Icon icon="uil:angle-double-left" className="w-8 h-8 text-slate-400" />}
+            ) : <Icon icon="uil:angle-double-left" className="w-8 h-8 text-zinc-400" />}
             {title.pagination.slice(1, title.pagination.length - 1).map((e) => (
               <Link
                 to={(() => {
@@ -191,7 +189,7 @@ function CatContent({
                   url.searchParams.set('page', e);
                   return url.pathname + url.search;
                 })()}
-                className={`${parseInt(e, 10) === currentPage ? 'bg-amber-400 text-white p-4 rounded-md shadow-md w-12 h-12 flex items-center justify-center' : 'text-slate-700 dark:text-white'} font-medium text-xl`}
+                className={`${parseInt(e, 10) === currentPage ? 'bg-amber-400 text-white p-4 rounded-md shadow-md w-12 h-12 flex items-center justify-center' : 'text-zinc-700 dark:text-white'} font-medium text-xl`}
               >
                 {e}
               </Link>
@@ -209,7 +207,7 @@ function CatContent({
               >
                 <Icon icon="uil:angle-double-right" className="w-8 h-8 text-amber-400" />
               </Link>
-              ) : <Icon icon="uil:angle-double-right" className="w-8 h-8 text-slate-400" />}
+              ) : <Icon icon="uil:angle-double-right" className="w-8 h-8 text-zinc-400" />}
           </div>
         ) : ''}
       </div>

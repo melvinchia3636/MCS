@@ -28,7 +28,13 @@ function SearchResults() {
     window.scrollTo({ top: 0 });
 
     const [d, t, c] = await getData(`https://cors-anywhere.thecodeblog.net/minecraft.buzz/search/${query}/${currentPage}&type=${new URL(window.location.href).searchParams.get('type')}&filter_country=${country}`, currentPage);
-    t.title = `Search results for '${query}'`;
+    t.title = (
+      <span className="text-zinc-700">
+        Search results for
+        {' '}
+        <span className="text-amber-400">{query}</span>
+      </span>
+    );
     t.desc = '';
     setData(d);
     setTitle(t);
@@ -47,7 +53,7 @@ function SearchResults() {
           countries={countries}
           hasSorting={false}
         />
-      ) : <p className="text-slate-700 dark:text-white text-2xl">No results were found.</p>
+      ) : <p className="text-zinc-700 dark:text-white text-2xl">No results were found.</p>
     ) : <Loading />
   );
 }
